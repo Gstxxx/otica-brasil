@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import HeroSection from './components/HeroSection';
 import MultifocaisSection from './components/MultifocaisSection';
 import BenefitsSection from './components/BenefitsSection';
-import ContactSection from './components/ContactSection';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,9 +44,6 @@ function App() {
 
       {/* Benefits Section */}
       <BenefitsSection scrollY={scrollY} />
-
-      {/* Contact Section */}
-      <ContactSection scrollY={scrollY} />
 
       {/* Footer */}
       <Footer />
