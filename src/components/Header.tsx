@@ -54,12 +54,17 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen }) => (
                     </a>
                     <a
                         href="https://linktr.ee/hightechnologydigital"
-                        className="backdrop-blur-md bg-white/20 border border-white/30 text-white px-6 py-3 rounded-full hover:bg-white/30 transition-all duration-300 font-light tracking-wide group relative after:content-[''] after:block after:h-[2px] after:bg-blue-300 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
+                        className="relative inline-flex items-center gap-3 px-7 py-3 rounded-xl bg-gradient-to-r from-blue-500/80 via-purple-500/80 to-indigo-500/80 shadow-lg border border-white/30 text-white font-medium tracking-wide transition-all duration-300 hover:from-blue-400/90 hover:via-purple-400/90 hover:to-indigo-400/90 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 group"
                         target="_blank"
                         rel="noopener noreferrer"
+                        style={{ boxShadow: '0 4px 24px 0 rgba(80, 80, 255, 0.15)' }}
                     >
-                        Agendar Consulta
-                        <ArrowRight className="inline ml-2 group-hover:translate-x-1 transition-transform" size={16} />
+                        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 group-hover:bg-white/30 transition-all duration-300">
+                            <ArrowRight className="text-blue-200 group-hover:text-white transition-colors duration-300" size={18} />
+                        </span>
+                        <span className="text-lg font-light">
+                            Verificar preço
+                        </span>
                     </a>
                 </nav>
 
@@ -86,7 +91,7 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen }) => (
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Agendar Consulta
+                            Verificar preço
                         </a>
                     </div>
                 </div>
