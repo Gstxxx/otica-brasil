@@ -206,7 +206,7 @@ export default function BuyNowPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 mt-20">
+    <div className="min-h-screen bg-gray-50 py-12 mt-20 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -259,7 +259,7 @@ export default function BuyNowPage() {
           <div className="mt-8 text-center">
             <button
               onClick={() => setShowForm(true)}
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium text-lg"
+              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium text-lg transition-colors duration-200"
             >
               Fazer Pedido
             </button>
