@@ -35,7 +35,10 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
+    <form
+      onSubmit={handleSubmit(onFormSubmit)}
+      className="space-y-6 relative z-10"
+    >
       <div>
         <label
           htmlFor="email"
@@ -47,8 +50,9 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
           id="email"
           type="email"
           {...register("email")}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black relative z-20"
           placeholder="seu@email.com"
+          style={{ pointerEvents: "auto" }}
         />
         {errors.email && (
           <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
@@ -66,8 +70,9 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
           id="password"
           type="password"
           {...register("password")}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black relative z-20"
           placeholder="Sua senha"
+          style={{ pointerEvents: "auto" }}
         />
         {errors.password && (
           <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>

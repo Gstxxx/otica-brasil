@@ -98,7 +98,7 @@ export default function RegisterPage() {
           </div>
 
           {/* Register Form */}
-          <div className="bg-white rounded-lg shadow-xl p-8">
+          <div className="bg-white rounded-lg shadow-xl p-8 relative z-30">
             {error && (
               <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-md">
                 <div className="flex">
@@ -145,7 +145,10 @@ export default function RegisterPage() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit(handleRegister)} className="space-y-6">
+            <form
+              onSubmit={handleSubmit(handleRegister)}
+              className="space-y-6 relative z-10"
+            >
               {/* Name */}
               <div>
                 <label
@@ -158,8 +161,9 @@ export default function RegisterPage() {
                   id="name"
                   type="text"
                   {...register("name")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black relative z-20"
                   placeholder="Seu nome completo"
+                  style={{ pointerEvents: "auto" }}
                 />
                 {errors.name && (
                   <p className="mt-1 text-sm text-red-600">
@@ -180,8 +184,9 @@ export default function RegisterPage() {
                   id="email"
                   type="email"
                   {...register("email")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black relative z-20"
                   placeholder="seu@email.com"
+                  style={{ pointerEvents: "auto" }}
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">
@@ -202,8 +207,9 @@ export default function RegisterPage() {
                   id="phone"
                   type="tel"
                   {...register("phone")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black relative z-20"
                   placeholder="(11) 99999-9999"
+                  style={{ pointerEvents: "auto" }}
                 />
                 {errors.phone && (
                   <p className="mt-1 text-sm text-red-600">
@@ -224,8 +230,9 @@ export default function RegisterPage() {
                   id="address"
                   type="text"
                   {...register("address")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black relative z-20"
                   placeholder="Rua, número, bairro"
+                  style={{ pointerEvents: "auto" }}
                 />
                 {errors.address && (
                   <p className="mt-1 text-sm text-red-600">
@@ -246,8 +253,9 @@ export default function RegisterPage() {
                   id="password"
                   type="password"
                   {...register("password")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black relative z-20"
                   placeholder="Mínimo 6 caracteres"
+                  style={{ pointerEvents: "auto" }}
                 />
                 {errors.password && (
                   <p className="mt-1 text-sm text-red-600">
@@ -268,8 +276,9 @@ export default function RegisterPage() {
                   id="confirmPassword"
                   type="password"
                   {...register("confirmPassword")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black relative z-20"
                   placeholder="Digite a senha novamente"
+                  style={{ pointerEvents: "auto" }}
                 />
                 {errors.confirmPassword && (
                   <p className="mt-1 text-sm text-red-600">

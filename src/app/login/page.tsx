@@ -57,7 +57,7 @@ export default function LoginPage() {
           </div>
 
           {/* Login Form */}
-          <div className="bg-white rounded-lg shadow-xl p-8">
+          <div className="bg-white rounded-lg shadow-xl p-8 relative z-30">
             {error && (
               <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-md">
                 <div className="flex">

@@ -105,9 +105,27 @@ export default function BuyNowPage() {
     customer: CompleteCustomerRegistrationInput;
     selectedLenses: string[];
     files: {
-      glassesPhoto: File | null;
-      prescriptionPhoto: File | null;
-      identityDocument: File | null;
+      glassesPhoto: {
+        url: string;
+        fileName: string;
+        originalName: string;
+        size: number;
+        type: string;
+      } | null;
+      prescriptionPhoto: {
+        url: string;
+        fileName: string;
+        originalName: string;
+        size: number;
+        type: string;
+      } | null;
+      identityDocument: {
+        url: string;
+        fileName: string;
+        originalName: string;
+        size: number;
+        type: string;
+      } | null;
     };
   }) => {
     try {

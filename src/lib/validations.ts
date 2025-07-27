@@ -110,7 +110,9 @@ export const completeCustomerRegistrationSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
   email: z.string().email("Email inválido"),
   phone: z.string().min(10, "Telefone deve ter pelo menos 10 dígitos"),
-  cep: z.string().min(8, "CEP deve ter 8 dígitos"),
+  cep: z
+    .string()
+    .regex(/^\d{5}-?\d{3}$/, "CEP deve estar no formato 00000-000 ou 00000000"),
   address: z.string().min(5, "Endereço deve ter pelo menos 5 caracteres"),
   city: z.string().min(2, "Cidade deve ter pelo menos 2 caracteres"),
   state: z.string().min(2, "Estado deve ter pelo menos 2 caracteres"),

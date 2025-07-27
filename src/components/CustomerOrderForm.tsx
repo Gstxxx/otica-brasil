@@ -11,6 +11,14 @@ import {
 import FileUpload from "./FileUpload";
 import CepInput from "./CepInput";
 
+interface UploadedFile {
+  url: string;
+  fileName: string;
+  originalName: string;
+  size: number;
+  type: string;
+}
+
 interface CustomerOrderFormProps {
   lensTypes: (
     | LensType
@@ -28,9 +36,9 @@ interface CustomerOrderFormProps {
     customer: CompleteCustomerRegistrationInput;
     selectedLenses: string[];
     files: {
-      glassesPhoto: File | null;
-      prescriptionPhoto: File | null;
-      identityDocument: File | null;
+      glassesPhoto: UploadedFile | null;
+      prescriptionPhoto: UploadedFile | null;
+      identityDocument: UploadedFile | null;
     };
   }) => Promise<void>;
 }
@@ -118,11 +126,84 @@ export default function CustomerOrderForm({
       return;
     }
 
-    await onSubmit({
-      customer: data,
-      selectedLenses,
-      files,
-    });
+    try {
+      // Upload dos arquivos
+      const uploadedFiles: {
+        glassesPhoto: UploadedFile | null;
+        prescriptionPhoto: UploadedFile | null;
+        identityDocument: UploadedFile | null;
+      } = {
+        glassesPhoto: null,
+        prescriptionPhoto: null,
+        identityDocument: null,
+      };
+
+      // Upload foto dos óculos
+      if (files.glassesPhoto) {
+        const formData = new FormData();
+        formData.append("file", files.glassesPhoto);
+        formData.append("type", "glasses");
+
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Erro ao fazer upload da foto dos óculos");
+        }
+
+        const result = await response.json();
+        uploadedFiles.glassesPhoto = result.data;
+      }
+
+      // Upload foto da prescrição
+      if (files.prescriptionPhoto) {
+        const formData = new FormData();
+        formData.append("file", files.prescriptionPhoto);
+        formData.append("type", "prescription");
+
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Erro ao fazer upload da foto da prescrição");
+        }
+
+        const result = await response.json();
+        uploadedFiles.prescriptionPhoto = result.data;
+      }
+
+      // Upload documento de identidade (opcional)
+      if (files.identityDocument) {
+        const formData = new FormData();
+        formData.append("file", files.identityDocument);
+        formData.append("type", "identity");
+
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Erro ao fazer upload do documento de identidade");
+        }
+
+        const result = await response.json();
+        uploadedFiles.identityDocument = result.data;
+      }
+
+      await onSubmit({
+        customer: data,
+        selectedLenses,
+        files: uploadedFiles,
+      });
+    } catch (error) {
+      console.error("Erro no upload:", error);
+      alert("Erro ao fazer upload dos arquivos. Tente novamente.");
+    }
   };
 
   const nextStep = () => setStep((prev) => Math.min(prev + 1, 4));

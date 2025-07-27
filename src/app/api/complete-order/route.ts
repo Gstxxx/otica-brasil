@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { completeCustomerRegistrationSchema } from "@/lib/validations";
 import {
-  validateRequest,
+  validateInput,
   createValidationErrorResponse,
   createSuccessResponse,
 } from "@/lib/validation-utils";
@@ -13,14 +13,21 @@ import type { CompleteCustomerRegistrationInput } from "@/lib/validations";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log("=== DEBUG: Body recebido ===");
+    console.log(JSON.stringify(body, null, 2));
     const { customer, selectedLenses, files } = body;
 
     // Validar dados do cliente
-    const validation = await validateRequest(
+    console.log("=== DEBUG: Validando customer ===");
+    console.log(JSON.stringify(customer, null, 2));
+    const validation = await validateInput(
       completeCustomerRegistrationSchema,
       customer
     );
+    console.log("=== DEBUG: Resultado da validação ===");
+    console.log(JSON.stringify(validation, null, 2));
     if (!validation.success) {
+      console.log("=== DEBUG: Validação falhou ===");
       return createValidationErrorResponse(validation.errors);
     }
 
@@ -37,8 +44,8 @@ export async function POST(request: NextRequest) {
       ]);
     }
 
-    // Validar arquivos obrigatórios
-    if (!files.glassesPhoto || !files.prescriptionPhoto) {
+    // Validar arquivos obrigatórios (agora são objetos com URL)
+    if (!files.glassesPhoto?.url || !files.prescriptionPhoto?.url) {
       return createValidationErrorResponse([
         "Foto dos óculos e prescrição são obrigatórias",
       ]);
@@ -56,13 +63,23 @@ export async function POST(request: NextRequest) {
     }
 
     // Buscar tipos de lentes
+    console.log("=== DEBUG: Buscando lentes ===");
+    console.log("IDs solicitados:", selectedLenses);
     const lensTypes = await prisma.lensType.findMany({
       where: { id: { in: selectedLenses } },
     });
+    console.log(
+      "Lentes encontradas:",
+      lensTypes.map((l) => ({ id: l.id, name: l.name }))
+    );
 
     if (lensTypes.length !== selectedLenses.length) {
+      console.log("=== DEBUG: Lentes não encontradas ===");
+      const foundIds = lensTypes.map((l) => l.id);
+      const missingIds = selectedLenses.filter((id) => !foundIds.includes(id));
+      console.log("IDs não encontrados:", missingIds);
       return createValidationErrorResponse([
-        "Um ou mais tipos de lente não encontrados",
+        `Um ou mais tipos de lente não encontrados: ${missingIds.join(", ")}`,
       ]);
     }
 
@@ -135,49 +152,50 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      // 6. Criar anexos (simulado - em produção você faria upload real)
+      // 6. Criar anexos com URLs reais dos arquivos
       const attachments = [];
 
-      if (files.glassesPhoto) {
+      if (files.glassesPhoto?.url) {
         attachments.push(
           tx.orderAttachment.create({
             data: {
               orderId: order.id,
               type: "GLASSES_PHOTO",
-              fileName: files.glassesPhoto.name,
-              fileUrl: `/uploads/glasses-${order.id}.jpg`, // Simulado
-              fileSize: files.glassesPhoto.size,
-              mimeType: files.glassesPhoto.type,
+              fileName: files.glassesPhoto.originalName || "glasses.jpg",
+              fileUrl: files.glassesPhoto.url,
+              fileSize: files.glassesPhoto.size || 0,
+              mimeType: files.glassesPhoto.type || "image/jpeg",
             },
           })
         );
       }
 
-      if (files.prescriptionPhoto) {
+      if (files.prescriptionPhoto?.url) {
         attachments.push(
           tx.orderAttachment.create({
             data: {
               orderId: order.id,
               type: "PRESCRIPTION_PHOTO",
-              fileName: files.prescriptionPhoto.name,
-              fileUrl: `/uploads/prescription-${order.id}.jpg`, // Simulado
-              fileSize: files.prescriptionPhoto.size,
-              mimeType: files.prescriptionPhoto.type,
+              fileName:
+                files.prescriptionPhoto.originalName || "prescription.jpg",
+              fileUrl: files.prescriptionPhoto.url,
+              fileSize: files.prescriptionPhoto.size || 0,
+              mimeType: files.prescriptionPhoto.type || "image/jpeg",
             },
           })
         );
       }
 
-      if (files.identityDocument) {
+      if (files.identityDocument?.url) {
         attachments.push(
           tx.orderAttachment.create({
             data: {
               orderId: order.id,
               type: "IDENTITY_DOCUMENT",
-              fileName: files.identityDocument.name,
-              fileUrl: `/uploads/identity-${order.id}.jpg`, // Simulado
-              fileSize: files.identityDocument.size,
-              mimeType: files.identityDocument.type,
+              fileName: files.identityDocument.originalName || "identity.jpg",
+              fileUrl: files.identityDocument.url,
+              fileSize: files.identityDocument.size || 0,
+              mimeType: files.identityDocument.type || "image/jpeg",
             },
           })
         );
