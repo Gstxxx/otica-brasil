@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HeroSection from './components/HeroSection';
-import MultifocaisSection from './components/MultifocaisSection';
-import BenefitsSection from './components/BenefitsSection';
+"use client";
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/NavBar";
 
-function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function MainLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const [scrollY, setScrollY] = useState(0);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -32,23 +32,8 @@ function App() {
           style={{ transform: `translateY(${scrollY * 0.05}px)` }}
         />
       </div>
-
-      {/* Header */}
-      <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-
-      {/* Hero Section */}
-      <HeroSection scrollY={scrollY} />
-
-      {/* Multifocais Section */}
-      <MultifocaisSection scrollY={scrollY} />
-
-      {/* Benefits Section */}
-      <BenefitsSection scrollY={scrollY} />
-
-      {/* Footer */}
-      <Footer />
+      <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      {children}
     </div>
   );
 }
-
-export default App;
