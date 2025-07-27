@@ -1,31 +1,34 @@
-"use client";
 import "./globals.css";
-import { usePathname } from "next/navigation";
+import type { Metadata } from "next";
 import MainLayout from "@/layouts/MainLayout";
-import { metadataInfo as metadata } from "@/layouts/metadata";
+import ClientAuthProvider from "@/components/ClientAuthProvider";
 
-export const metadataInfo = metadata;
+export const metadata: Metadata = {
+  title: "Otica Brasil",
+  description: "Sua otica no sul do estado",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-
-  const isDashboard = pathname.startsWith("/dashboard");
-  const isCustomer = pathname.startsWith("/my-area");
-
-  if (isDashboard || isCustomer) {
-    <html lang="pt-br">
-      <body className={`antialiased`}>{children}</body>
-    </html>;
-  }
-
   return (
     <html lang="pt-br">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </head>
       <body className={`antialiased`}>
-        <MainLayout>{children}</MainLayout>
+        <ClientAuthProvider>
+          <MainLayout>{children}</MainLayout>
+        </ClientAuthProvider>
       </body>
     </html>
   );

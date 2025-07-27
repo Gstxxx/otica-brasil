@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ótica Brasil
 
-## Getting Started
+Sistema completo de gerenciamento para ótica, desenvolvido com Next.js 15, TypeScript, Prisma e PostgreSQL.
 
-First, run the development server:
+## 🚀 Funcionalidades
+
+- **Autenticação Segura**: Sistema de login/registro com bcrypt e JWT
+- **Gestão de Pedidos**: Criação e acompanhamento de pedidos de lentes
+- **Dashboard Admin**: Interface administrativa para gestão
+- **Área do Cliente**: Portal para clientes acompanharem seus pedidos
+- **Upload de Arquivos**: Sistema para envio de receitas e documentos
+
+## 📚 Documentação
+
+Consulte nossa [documentação completa](./docs/README.md) para:
+
+- [Sistema de Autenticação](./docs/AUTHENTICATION.md)
+- Guias de desenvolvimento
+- Configuração de ambiente
+- Deploy e produção
+
+## 🛠️ Tecnologias
+
+- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes, Prisma ORM
+- **Banco de Dados**: PostgreSQL
+- **Autenticação**: bcrypt, JWT
+- **Validação**: Zod
+- **Formulários**: React Hook Form
+
+## 🚀 Getting Started
+
+### Pré-requisitos
+
+- Node.js 18+
+- PostgreSQL
+- npm ou yarn
+
+### Instalação
+
+1. Clone o repositório
+
+```bash
+git clone <url-do-repositorio>
+cd otica-brasil
+```
+
+2. Instale as dependências
+
+```bash
+npm install
+```
+
+3. Configure as variáveis de ambiente
+
+```bash
+cp .env.example .env
+# Edite o arquivo .env com suas configurações
+```
+
+4. Configure o banco de dados
+
+```bash
+npx prisma db push
+npm run db:seed
+```
+
+5. Execute o servidor de desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse [http://localhost:3000](http://localhost:3000) para ver o resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📋 Comandos Úteis
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Desenvolvimento
+npm run dev          # Servidor de desenvolvimento
+npm run build        # Build de produção
+npm run lint         # Verificar código
 
-## Learn More
+# Banco de dados
+npm run db:generate  # Gerar cliente Prisma
+npm run db:push      # Sincronizar schema
+npm run db:seed      # Executar seed
+npm run db:studio    # Abrir Prisma Studio
 
-To learn more about Next.js, take a look at the following resources:
+# Deploy
+npm run start        # Servidor de produção
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 👥 Usuários de Teste
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Tipo    | Email               | Senha        | Acesso          |
+| ------- | ------------------- | ------------ | --------------- |
+| Admin   | `admin@otica.com`   | `admin123`   | Dashboard       |
+| Cliente | `cliente@teste.com` | `cliente123` | Área do Cliente |
 
-## Deploy on Vercel
+## 📄 Licença
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contribuindo
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+---
+
+**Desenvolvido com ❤️ para Ótica Brasil**

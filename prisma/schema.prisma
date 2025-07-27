@@ -1,0 +1,192 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      UserRole @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  customer  Customer?
+  admin     Admin?
+
+  @@map("users")
+}
+
+model Customer {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  phone       String?
+  address     String?
+  cep         String?
+  city        String?
+  state       String?
+  birthDate   DateTime?
+  prescriptions Prescription[]
+  orders      Order[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relacionamento com User
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("customers")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamento com User
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("admins")
+}
+
+model LensType {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  basePrice   Decimal  @db.Decimal(10, 2)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relacionamentos
+  orderItems OrderItem[]
+
+  @@map("lens_types")
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  customerId  String
+  status      OrderStatus @default(PENDING)
+  totalAmount Decimal     @db.Decimal(10, 2)
+  notes       String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relacionamentos
+  customer    Customer    @relation(fields: [customerId], references: [id])
+  orderItems  OrderItem[]
+  tracking    Tracking[]
+  attachments OrderAttachment[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  lensTypeId String
+  quantity  Int      @default(1)
+  price     Decimal @db.Decimal(10, 2)
+  createdAt DateTime @default(now())
+
+  // Relacionamentos
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  lensType LensType @relation(fields: [lensTypeId], references: [id])
+
+  @@map("order_items")
+}
+
+model Prescription {
+  id              String   @id @default(cuid())
+  customerId      String
+  rightEyeSphere  Decimal? @db.Decimal(4, 2)
+  leftEyeSphere   Decimal? @db.Decimal(4, 2)
+  rightEyeCylinder Decimal? @db.Decimal(4, 2)
+  leftEyeCylinder  Decimal? @db.Decimal(4, 2)
+  rightEyeAxis     Int?
+  leftEyeAxis      Int?
+  rightEyeAdd      Decimal? @db.Decimal(4, 2)
+  leftEyeAdd       Decimal? @db.Decimal(4, 2)
+  pupillaryDistance Decimal? @db.Decimal(4, 1)
+  notes            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relacionamento com Customer
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@map("prescriptions")
+}
+
+model Tracking {
+  id          String        @id @default(cuid())
+  orderId     String
+  status      TrackingStatus
+  description String?
+  location    String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relacionamento com Order
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("tracking")
+}
+
+model OrderAttachment {
+  id          String   @id @default(cuid())
+  orderId     String
+  type        AttachmentType
+  fileName    String
+  fileUrl     String
+  fileSize    Int
+  mimeType    String
+  createdAt   DateTime @default(now())
+
+  // Relacionamento com Order
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_attachments")
+}
+
+enum UserRole {
+  ADMIN
+  CUSTOMER
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  GLASSES_RECEIVED
+  LENSES_IN_PRODUCTION
+  READY_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum TrackingStatus {
+  ORDER_PLACED
+  GLASSES_SENT
+  GLASSES_RECEIVED
+  LENSES_IN_PRODUCTION
+  LENSES_READY
+  GLASSES_SHIPPED
+  GLASSES_DELIVERED
+}
+
+enum AttachmentType {
+  GLASSES_PHOTO
+  PRESCRIPTION_PHOTO
+  IDENTITY_DOCUMENT
+  OTHER
+}
