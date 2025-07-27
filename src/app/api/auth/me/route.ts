@@ -41,6 +41,8 @@ export async function GET(request: NextRequest) {
       admin: user.admin,
     };
 
+    console.log("🔍 API /me: Retornando dados do usuário:", userData);
+
     return createSuccessResponse({
       user: userData,
     });

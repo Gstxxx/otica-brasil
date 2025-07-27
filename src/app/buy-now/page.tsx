@@ -146,7 +146,7 @@ export default function BuyNowPage() {
       }
 
       alert(
-        `Pedido enviado com sucesso! ID: ${result.data.order.id}\nEm breve entraremos em contato.`
+        `Pedido enviado com sucesso! ID: ${result.data.order.id}\n\nSua senha temporária é: ${result.data.tempPassword}\n\nUse esta senha para fazer login em sua conta.`
       );
       setShowForm(false);
     } catch (error) {

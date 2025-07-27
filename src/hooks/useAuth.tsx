@@ -30,15 +30,41 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     checkAuth();
   }, []);
 
+  // Adicionar um useEffect para recarregar a autenticação quando a página for focada
+  useEffect(() => {
+    const handleFocus = () => {
+      if (!user && !loading) {
+        checkAuth();
+      }
+    };
+
+    window.addEventListener("focus", handleFocus);
+    return () => window.removeEventListener("focus", handleFocus);
+  }, [user, loading]);
+
   const checkAuth = async () => {
     try {
+      setLoading(true);
       const response = await fetch("/api/auth/me");
+
       if (response.ok) {
-        const data = await response.json();
-        setUser(data.user);
+        const responseData = await response.json();
+        console.log("✅ Auth check successful:", responseData);
+
+        if (responseData.data && responseData.data.user) {
+          console.log("✅ User data found:", responseData.data.user.email);
+          setUser(responseData.data.user);
+        } else {
+          console.log("❌ User data is undefined in response");
+          setUser(null);
+        }
+      } else {
+        console.log("❌ Auth check failed:", response.status);
+        setUser(null);
       }
     } catch (error) {
       console.error("Erro ao verificar autenticação:", error);
+      setUser(null);
     } finally {
       setLoading(false);
     }
@@ -62,6 +88,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setUser(data.data.user);
 
+      // Redirecionar baseado no role do usuário
       if (data.data.user.role === "ADMIN") {
         router.push("/dashboard");
       } else {

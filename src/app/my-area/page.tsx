@@ -49,6 +49,11 @@ interface Order {
 
 export default function MyArea() {
   const { user, loading } = useAuth();
+
+  console.log("🔍 MyArea Debug:", {
+    loading,
+    user: user ? user.email : "null",
+  });
   const [isEditing, setIsEditing] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -258,9 +263,36 @@ export default function MyArea() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <p className="text-gray-600">
+          <p className="text-gray-600 mb-4">
             Você precisa estar logado para acessar esta página.
           </p>
+          <div className="space-y-2">
+            <button
+              onClick={() => {
+                console.log("🔄 Forçando reload da página...");
+                window.location.reload();
+              }}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            >
+              Tentar Novamente
+            </button>
+            <br />
+            <button
+              onClick={() => {
+                console.log("🔄 Forçando verificação de auth...");
+                window.location.href = "/my-area";
+              }}
+              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors mr-2"
+            >
+              Verificar Auth
+            </button>
+            <a
+              href="/login"
+              className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+            >
+              Ir para Login
+            </a>
+          </div>
         </div>
       </div>
     );
