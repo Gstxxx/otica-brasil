@@ -185,7 +185,7 @@ export default function BuyNowPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border p-6">
+          <div className="bg-white rounded-lg shadow-sm border p-6 relative z-30">
             <CustomerOrderForm
               lensTypes={lensTypes}
               onSubmit={handleOrderSubmit}

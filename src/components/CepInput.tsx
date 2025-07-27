@@ -105,9 +105,10 @@ export default function CepInput({
             onChange={handleCepChange}
             placeholder="00000-000"
             maxLength={9}
-            className={`flex-1 px-3 py-2 border rounded-l-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+            className={`flex-1 px-3 py-2 border rounded-l-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 relative z-20 text-black ${
               error ? "border-red-300" : "border-gray-300"
             }`}
+            style={{ pointerEvents: "auto" }}
           />
           <button
             type="button"

@@ -165,8 +165,9 @@ export default function CustomerOrderForm({
           <input
             type="text"
             {...register("name")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 relative z-20 text-black"
             placeholder="Seu nome completo"
+            style={{ pointerEvents: "auto" }}
           />
           {errors.name && (
             <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
@@ -180,8 +181,9 @@ export default function CustomerOrderForm({
           <input
             type="email"
             {...register("email")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 relative z-20 text-black"
             placeholder="seu@email.com"
+            style={{ pointerEvents: "auto" }}
           />
           {errors.email && (
             <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
@@ -195,8 +197,9 @@ export default function CustomerOrderForm({
           <input
             type="tel"
             {...register("phone")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 relative z-20 text-black"
             placeholder="(11) 99999-9999"
+            style={{ pointerEvents: "auto" }}
           />
           {errors.phone && (
             <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
@@ -210,7 +213,8 @@ export default function CustomerOrderForm({
           <input
             type="date"
             {...register("birthDate")}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 relative z-20 text-black"
+            style={{ pointerEvents: "auto" }}
           />
         </div>
       </div>
@@ -255,8 +259,9 @@ export default function CustomerOrderForm({
               setAddress((prev) => ({ ...prev, address: e.target.value }));
               setValue("address", e.target.value);
             }}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 relative z-20 text-black"
             placeholder="Rua, número, complemento"
+            style={{ pointerEvents: "auto" }}
           />
           {errors.address && (
             <p className="mt-1 text-sm text-red-600">
@@ -277,8 +282,9 @@ export default function CustomerOrderForm({
               setAddress((prev) => ({ ...prev, city: e.target.value }));
               setValue("city", e.target.value);
             }}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 relative z-20 text-black"
             placeholder="Sua cidade"
+            style={{ pointerEvents: "auto" }}
           />
           {errors.city && (
             <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
@@ -297,8 +303,9 @@ export default function CustomerOrderForm({
               setAddress((prev) => ({ ...prev, state: e.target.value }));
               setValue("state", e.target.value);
             }}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 relative z-20 text-black"
             placeholder="Seu estado"
+            style={{ pointerEvents: "auto" }}
           />
           {errors.state && (
             <p className="mt-1 text-sm text-red-600">{errors.state.message}</p>
@@ -484,7 +491,10 @@ export default function CustomerOrderForm({
   );
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-8">
+    <form
+      onSubmit={handleSubmit(onFormSubmit)}
+      className="space-y-8 relative z-10"
+    >
       {renderStepIndicator()}
 
       {step === 1 && renderStep1()}

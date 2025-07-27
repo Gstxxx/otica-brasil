@@ -158,7 +158,7 @@ export default function RegisterPage() {
                   id="name"
                   type="text"
                   {...register("name")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
                   placeholder="Seu nome completo"
                 />
                 {errors.name && (
@@ -180,7 +180,7 @@ export default function RegisterPage() {
                   id="email"
                   type="email"
                   {...register("email")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
                   placeholder="seu@email.com"
                 />
                 {errors.email && (
@@ -202,7 +202,7 @@ export default function RegisterPage() {
                   id="phone"
                   type="tel"
                   {...register("phone")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
                   placeholder="(11) 99999-9999"
                 />
                 {errors.phone && (
@@ -224,7 +224,7 @@ export default function RegisterPage() {
                   id="address"
                   type="text"
                   {...register("address")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
                   placeholder="Rua, número, bairro"
                 />
                 {errors.address && (
@@ -246,7 +246,7 @@ export default function RegisterPage() {
                   id="password"
                   type="password"
                   {...register("password")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
                   placeholder="Mínimo 6 caracteres"
                 />
                 {errors.password && (
@@ -268,7 +268,7 @@ export default function RegisterPage() {
                   id="confirmPassword"
                   type="password"
                   {...register("confirmPassword")}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
                   placeholder="Digite a senha novamente"
                 />
                 {errors.confirmPassword && (

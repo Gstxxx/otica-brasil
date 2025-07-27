@@ -332,7 +332,7 @@ export default function MyArea() {
                     <input
                       type="text"
                       {...register("name")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     />
                     {errors.name && (
                       <p className="mt-1 text-sm text-red-600">
@@ -363,7 +363,7 @@ export default function MyArea() {
                     <input
                       type="tel"
                       {...register("phone")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     />
                     {errors.phone && (
                       <p className="mt-1 text-sm text-red-600">
@@ -379,7 +379,7 @@ export default function MyArea() {
                     <input
                       type="text"
                       {...register("cep")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     />
                     {errors.cep && (
                       <p className="mt-1 text-sm text-red-600">
@@ -395,7 +395,7 @@ export default function MyArea() {
                     <input
                       type="text"
                       {...register("address")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     />
                     {errors.address && (
                       <p className="mt-1 text-sm text-red-600">
@@ -412,7 +412,7 @@ export default function MyArea() {
                       <input
                         type="text"
                         {...register("city")}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                       />
                       {errors.city && (
                         <p className="mt-1 text-sm text-red-600">
@@ -428,7 +428,7 @@ export default function MyArea() {
                       <input
                         type="text"
                         {...register("state")}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                       />
                       {errors.state && (
                         <p className="mt-1 text-sm text-red-600">
@@ -445,7 +445,7 @@ export default function MyArea() {
                     <input
                       type="date"
                       {...register("birthDate")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     />
                     {errors.birthDate && (
                       <p className="mt-1 text-sm text-red-600">
@@ -521,7 +521,7 @@ export default function MyArea() {
                       <input
                         type="password"
                         {...registerPassword("currentPassword")}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                       />
                       {passwordErrors.currentPassword && (
                         <p className="mt-1 text-sm text-red-600">
@@ -538,7 +538,7 @@ export default function MyArea() {
                         <input
                           type={showPassword ? "text" : "password"}
                           {...registerPassword("newPassword")}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                         />
                         <button
                           type="button"
@@ -566,7 +566,7 @@ export default function MyArea() {
                       <input
                         type="password"
                         {...registerPassword("confirmNewPassword")}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                       />
                       {passwordErrors.confirmNewPassword && (
                         <p className="mt-1 text-sm text-red-600">

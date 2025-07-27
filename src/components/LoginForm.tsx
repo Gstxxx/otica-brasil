@@ -47,7 +47,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
           id="email"
           type="email"
           {...register("email")}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
           placeholder="seu@email.com"
         />
         {errors.email && (
@@ -66,7 +66,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
           id="password"
           type="password"
           {...register("password")}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-black"
           placeholder="Sua senha"
         />
         {errors.password && (
