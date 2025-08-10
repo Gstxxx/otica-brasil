@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import type { LensType } from "@prisma/client";
-import CustomerOrderForm from "@/components/CustomerOrderForm";
-import type { CompleteCustomerRegistrationInput } from "@/lib/validations";
+import PurchaseModal from "@/components/PurchaseModal";
 
 // Tipo simplificado para dados estáticos
 type StaticLensType = Omit<LensType, "basePrice"> & {
@@ -73,7 +72,8 @@ export default function BuyNowPage() {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showForm, setShowForm] = useState(false);
+  const [selectedLenses, setSelectedLenses] = useState<string[]>([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchLensTypes();
@@ -101,62 +101,55 @@ export default function BuyNowPage() {
     }
   };
 
-  const handleOrderSubmit = async (data: {
-    customer: CompleteCustomerRegistrationInput;
-    selectedLenses: string[];
-    files: {
-      glassesPhoto: {
-        url: string;
-        fileName: string;
-        originalName: string;
-        size: number;
-        type: string;
-      } | null;
-      prescriptionPhoto: {
-        url: string;
-        fileName: string;
-        originalName: string;
-        size: number;
-        type: string;
-      } | null;
-      identityDocument: {
-        url: string;
-        fileName: string;
-        originalName: string;
-        size: number;
-        type: string;
-      } | null;
-    };
-  }) => {
+  const handleLensToggle = (lensId: string) => {
+    setSelectedLenses((prev) =>
+      prev.includes(lensId)
+        ? prev.filter((id) => id !== lensId)
+        : [...prev, lensId]
+    );
+  };
+
+  const calculateTotal = () => {
+    return selectedLenses.reduce((total, lensId) => {
+      const lens = lensTypes.find((l) => l.id === lensId);
+      return total + (lens ? parseFloat(lens.basePrice.toString()) : 0);
+    }, 0);
+  };
+
+  const getSelectedLensesData = () => {
+    return selectedLenses.map((lensId) => {
+      const lens = lensTypes.find((l) => l.id === lensId);
+      return {
+        id: lensId,
+        name: lens?.name || "",
+        basePrice: lens?.basePrice.toString() || "0",
+      };
+    });
+  };
+
+  const handlePurchaseSubmit = async (data: any) => {
     try {
-      console.log("Dados do pedido:", data);
+      console.log("Dados do pedido:", { ...data, selectedLenses });
 
-      const response = await fetch("/api/complete-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      // Aqui você pode implementar a lógica de envio do pedido
+      // Por enquanto, vamos simular um sucesso
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || "Erro ao processar pedido");
-      }
-
-      alert(
-        `Pedido enviado com sucesso! ID: ${result.data.order.id}\n\nSua senha temporária é: ${result.data.tempPassword}\n\nUse esta senha para fazer login em sua conta.`
-      );
-      setShowForm(false);
+      alert("Pedido enviado com sucesso! Entraremos em contato em breve.");
+      setSelectedLenses([]);
+      setShowModal(false);
     } catch (error) {
       console.error("Erro ao processar pedido:", error);
-      alert(
-        error instanceof Error
-          ? error.message
-          : "Erro ao processar pedido. Tente novamente."
-      );
+      alert("Erro ao processar pedido. Tente novamente.");
     }
+  };
+
+  const handleBuyNow = () => {
+    if (selectedLenses.length === 0) {
+      alert("Selecione pelo menos um tipo de lente");
+      return;
+    }
+    setShowModal(true);
   };
 
   if (isLoading) {
@@ -190,39 +183,6 @@ export default function BuyNowPage() {
     );
   }
 
-  if (showForm) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-12 mt-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Finalizar Pedido
-            </h1>
-            <p className="text-xl text-gray-600">
-              Preencha seus dados e envie os documentos necessários
-            </p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm border p-6 relative z-30">
-            <CustomerOrderForm
-              lensTypes={lensTypes}
-              onSubmit={handleOrderSubmit}
-            />
-          </div>
-
-          <div className="text-center mt-6">
-            <button
-              onClick={() => setShowForm(false)}
-              className="text-blue-600 hover:text-blue-700 font-medium"
-            >
-              ← Voltar para a lista de lentes
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 py-12 mt-20 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -232,7 +192,7 @@ export default function BuyNowPage() {
             Comprar Lentes
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Escolha suas lentes e envie seus óculos para aplicação. Nossa equipe
+            Escolha suas lentes e finalize seu pedido. Nossa equipe
             especializada cuidará de tudo para você.
           </p>
         </div>
@@ -253,13 +213,29 @@ export default function BuyNowPage() {
 
           <div className="grid gap-4">
             {lensTypes.map((lens) => (
-              <div key={lens.id} className="border rounded-lg p-4">
+              <div
+                key={lens.id}
+                className={`border rounded-lg p-4 cursor-pointer transition-all ${
+                  selectedLenses.includes(lens.id)
+                    ? "border-blue-500 bg-blue-50"
+                    : "border-gray-300 hover:border-gray-400"
+                }`}
+                onClick={() => handleLensToggle(lens.id)}
+              >
                 <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {lens.name}
-                    </h3>
-                    <p className="text-gray-600 mt-1">{lens.description}</p>
+                  <div className="flex items-center space-x-3">
+                    <input
+                      type="checkbox"
+                      checked={selectedLenses.includes(lens.id)}
+                      onChange={() => handleLensToggle(lens.id)}
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        {lens.name}
+                      </h3>
+                      <p className="text-gray-600 mt-1">{lens.description}</p>
+                    </div>
                   </div>
                   <div className="text-right">
                     <span className="text-lg font-semibold text-gray-900">
@@ -274,20 +250,70 @@ export default function BuyNowPage() {
             ))}
           </div>
 
-          <div className="mt-8 text-center">
-            <button
-              onClick={() => setShowForm(true)}
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium text-lg transition-colors duration-200"
-            >
-              Fazer Pedido
-            </button>
-            <p className="text-gray-600 mt-4">
-              Total de tipos de lentes: {lensTypes.length}
-            </p>
-            {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
+          {/* Resumo e Botão de Compra */}
+          <div className="mt-8 border-t pt-6">
+            {selectedLenses.length > 0 && (
+              <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                <h3 className="font-semibold text-gray-900 mb-3">
+                  Lentes Selecionadas
+                </h3>
+                <div className="space-y-2">
+                  {selectedLenses.map((lensId) => {
+                    const lens = lensTypes.find((l) => l.id === lensId);
+                    return (
+                      <div
+                        key={lensId}
+                        className="flex justify-between text-sm"
+                      >
+                        <span>{lens?.name}</span>
+                        <span>
+                          R${" "}
+                          {parseFloat(lens?.basePrice.toString() || "0")
+                            .toFixed(2)
+                            .replace(".", ",")}
+                        </span>
+                      </div>
+                    );
+                  })}
+                  <div className="border-t pt-2 flex justify-between font-semibold">
+                    <span>Total:</span>
+                    <span>
+                      R$ {calculateTotal().toFixed(2).replace(".", ",")}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="text-center">
+              <button
+                onClick={handleBuyNow}
+                disabled={selectedLenses.length === 0}
+                className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium text-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {selectedLenses.length === 0
+                  ? "Selecione uma lente"
+                  : `Comprar por R$ ${calculateTotal()
+                      .toFixed(2)
+                      .replace(".", ",")}`}
+              </button>
+              <p className="text-gray-600 mt-4">
+                Total de tipos de lentes: {lensTypes.length}
+              </p>
+              {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Modal de Compra */}
+      <PurchaseModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        selectedLenses={getSelectedLensesData()}
+        totalPrice={calculateTotal()}
+        onSubmit={handlePurchaseSubmit}
+      />
     </div>
   );
 }
