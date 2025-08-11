@@ -52,7 +52,13 @@ const purchaseSchema = z.object({
   notes: z.string().optional(),
 });
 
-type PurchaseFormData = z.infer<typeof purchaseSchema>;
+export type PurchaseFormData = z.infer<typeof purchaseSchema>;
+
+export type PurchaseFiles = {
+  profilePhoto: File | null;
+  prescriptionPhoto: File | null;
+  glassesPhoto: File | null;
+};
 
 interface PurchaseModalProps {
   isOpen: boolean;
@@ -63,7 +69,7 @@ interface PurchaseModalProps {
     basePrice: string;
   }>;
   totalPrice: number;
-  onSubmit: (data: PurchaseFormData & { files: any }) => Promise<void>;
+  onSubmit: (data: PurchaseFormData & { files: PurchaseFiles }) => Promise<void>;
 }
 
 export default function PurchaseModal({
@@ -74,10 +80,10 @@ export default function PurchaseModal({
   onSubmit,
 }: PurchaseModalProps) {
   const [step, setStep] = useState(1);
-  const [files, setFiles] = useState({
-    profilePhoto: null as File | null,
-    prescriptionPhoto: null as File | null,
-    glassesPhoto: null as File | null,
+  const [files, setFiles] = useState<PurchaseFiles>({
+    profilePhoto: null,
+    prescriptionPhoto: null,
+    glassesPhoto: null,
   });
   const [address, setAddress] = useState({
     cep: "",
@@ -597,12 +603,12 @@ export default function PurchaseModal({
         <h4 className="font-medium text-gray-900 mb-3">Resumo do Pedido</h4>
         <div className="space-y-2">
           {selectedLenses.map((lens) => (
-            <div key={lens.id} className="flex justify-between text-sm">
+            <div key={lens.id} className="flex justify-between text-sm text-gray-700">
               <span>{lens.name}</span>
               <span>R$ {parseFloat(lens.basePrice).toFixed(2)}</span>
             </div>
           ))}
-          <div className="border-t pt-2 flex justify-between font-semibold">
+          <div className="border-t pt-2 flex justify-between font-semibold text-gray-900" >
             <span>Total:</span>
             <span>R$ {totalPrice.toFixed(2)}</span>
           </div>
@@ -631,15 +637,17 @@ export default function PurchaseModal({
   );
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-gray-900">
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+      {/* Overlay com gradiente e blur */}
+      <div className="absolute inset-0 backdrop-blur-sm bg-gradient-to-br from-slate-900/70 via-blue-900/70 to-indigo-900/70" />
+      <div className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div className="sticky top-0 bg-white/80 backdrop-blur border-b px-6 py-4 flex justify-between items-center">
+          <h2 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-fuchsia-600">
             Finalizar Compra
           </h2>
           <button
             onClick={handleClose}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-400 hover:text-gray-600 hover:scale-105 transition-transform"
           >
             <X className="w-6 h-6" />
           </button>
