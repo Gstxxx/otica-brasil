@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validar arquivos obrigatórios (agora são objetos com URL)
-    if (!files.glassesPhoto?.url || !files.prescriptionPhoto?.url) {
+    if (!files?.glassesPhoto?.url || !files?.prescriptionPhoto?.url) {
       return createValidationErrorResponse([
         "Foto dos óculos e prescrição são obrigatórias",
       ]);
@@ -155,7 +155,7 @@ export async function POST(request: NextRequest) {
       // 6. Criar anexos com URLs reais dos arquivos
       const attachments = [];
 
-      if (files.glassesPhoto?.url) {
+      if (files?.glassesPhoto?.url) {
         attachments.push(
           tx.orderAttachment.create({
             data: {
@@ -170,7 +170,7 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      if (files.prescriptionPhoto?.url) {
+      if (files?.prescriptionPhoto?.url) {
         attachments.push(
           tx.orderAttachment.create({
             data: {
@@ -186,7 +186,7 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      if (files.identityDocument?.url) {
+      if (files?.identityDocument?.url) {
         attachments.push(
           tx.orderAttachment.create({
             data: {
