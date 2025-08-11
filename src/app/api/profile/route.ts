@@ -74,7 +74,18 @@ export async function PUT(request: NextRequest) {
       },
       "Perfil atualizado com sucesso"
     );
-  } catch (error) {
+  } catch (error: any) {
+    // Corrige possíveis erros de referência a File (ex: ReferenceError: File is not defined)
+    if (
+      error instanceof ReferenceError &&
+      typeof error.message === "string" &&
+      error.message.includes("File is not defined")
+    ) {
+      console.error("Erro de referência a File:", error);
+      return createValidationErrorResponse([
+        "Erro interno: recurso de arquivo não suportado neste endpoint.",
+      ]);
+    }
     console.error("Erro ao atualizar perfil:", error);
     return createValidationErrorResponse(["Erro interno do servidor"]);
   }
