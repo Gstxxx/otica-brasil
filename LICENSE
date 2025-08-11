@@ -1,0 +1,54 @@
+LICENÇA COMERCIAL – ÓTICA BRASIL
+
+Versão 1.0 – 2025-08-11
+
+Este software e todo o seu código-fonte (“Software”) são propriedade do Licenciante e são disponibilizados sob os termos desta Licença Comercial. AO CLONAR, BAIXAR, INSTALAR, EXECUTAR OU USAR O SOFTWARE, VOCÊ CONCORDA COM ESTES TERMOS.
+
+1. Definições
+1.1 “Licenciante”: Gustavo Azevedo.
+1.2 “Licenciado”: a pessoa física ou jurídica que aceita este contrato.
+1.3 “Uso em Produção”: qualquer uso do Software acessível por usuários finais reais, clientes ou público em geral, inclusive ambientes de staging que atendam usuários externos.
+
+2. Concessão de Licença
+2.1 Sujeito ao pagamento das taxas aplicáveis, o Licenciante concede ao Licenciado uma licença limitada, não exclusiva, intransferível e não sublicenciável para instalar e usar o Software: (i) para desenvolvimento interno e testes; e (ii) em um único produto/sistema do Licenciado em Produção, para uma única organização/cliente final.
+2.2 Modificações. O Licenciado pode modificar o Software exclusivamente para atender às suas necessidades internas no produto licenciado. Qualquer modificação continua sujeita a esta Licença e não pode ser distribuída ou licenciada a terceiros.
+
+3. Avaliação
+3.1 O Licenciado pode avaliar o Software por até 30 (trinta) dias somente em ambientes de desenvolvimento/teste não comerciais. Qualquer Uso em Produção ou após o prazo de avaliação requer a compra de licença comercial.
+
+4. Restrições
+4.1 É expressamente proibido: (a) redistribuir, publicar, sublicenciar, vender, alugar, ofertar como SaaS/serviço a terceiros, disponibilizar o Software ou suas modificações a qualquer terceiro que não seja o cliente final do produto licenciado; (b) incorporar o Software, no todo ou em parte, em projetos de código aberto ou sob licenças que concedam direitos equivalentes; (c) remover avisos de copyright ou marcas; (d) usar o Software para treinar modelos de IA genéricos; (e) engenharia reversa, exceto na medida permitida por lei.
+
+5. Propriedade Intelectual
+5.1 O Software é licenciado, não vendido. Todos os direitos, títulos e interesses, incluindo direitos autorais, pertencem ao Licenciante.
+
+6. Suporte e Atualizações
+6.1 Não há obrigação de suporte. Suporte e atualizações podem ser oferecidos separadamente mediante contrato.
+
+7. Taxas e Pagamento
+7.1 Qualquer Uso em Produção requer o pagamento prévio de licença comercial. Para cotação e condições, contate: contatogstx@gmail.com. O não pagamento autoriza o Licenciante a rescindir esta Licença imediatamente.
+
+8. Confidencialidade
+8.1 O código-fonte e a documentação são informações confidenciais do Licenciante. O Licenciado concorda em protegê-las contra divulgação não autorizada.
+
+9. Garantias e Isenções
+9.1 O SOFTWARE É FORNECIDO “NO ESTADO EM QUE SE ENCONTRA”, SEM GARANTIAS DE QUALQUER TIPO, EXPRESSAS OU IMPLÍCITAS, INCLUINDO, SEM LIMITAÇÃO, GARANTIAS DE COMERCIABILIDADE, ADEQUAÇÃO A UM FIM ESPECÍFICO E NÃO VIOLAÇÃO.
+
+10. Limitação de Responsabilidade
+10.1 EM NENHUMA HIPÓTESE O LICENCIANTE SERÁ RESPONSÁVEL POR DANOS INDIRETOS, INCIDENTAIS, ESPECIAIS, EXEMPLARES OU CONSEQUENTES, INCLUINDO LUCROS CESSANTES, INTERRUPÇÃO DE NEGÓCIOS, PERDA DE DADOS, MESMO QUE AVISADO DA POSSIBILIDADE DE TAIS DANOS. A RESPONSABILIDADE TOTAL DO LICENCIANTE RELACIONADA AO SOFTWARE ESTÁ LIMITADA AO VALOR EFETIVAMENTE PAGO PELO LICENCIADO PELA LICENÇA NO PERÍODO DE 12 (DOZE) MESES ANTERIOR AO EVENTO.
+
+11. Vigência e Rescisão
+11.1 Esta Licença entra em vigor na aceitação e permanece até ser rescindida. O Licenciante pode rescindir em caso de violação. Com a rescisão, o Licenciado deve cessar o uso e destruir todas as cópias do Software.
+
+12. Lei Aplicável e Foro
+12.1 Esta Licença será regida pelas leis do Brasil. Fica eleito o foro da comarca do domicílio do Licenciante, com renúncia a qualquer outro, por mais privilegiado que seja.
+
+13. Disposições Gerais
+13.1 Se qualquer disposição for inválida, as demais permanecerão em vigor. Esta Licença constitui o acordo integral entre as partes quanto ao objeto.
+
+Aviso de Licença
+Qualquer uso, distribuição, modificação ou implantação em produção deste Software sem licença comercial válida é estritamente proibido. Para obter uma licença, entre em contato: contatogstx@gmail.com.
+
+Copyright © 2025 Gstx. Todos os direitos reservados.
+
+

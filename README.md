@@ -100,7 +100,10 @@ npm run start        # Servidor de produção
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto é disponibilizado sob **Licença Comercial**. Qualquer uso em produção, distribuição ou disponibilização a terceiros requer a aquisição de uma licença paga. Veja o arquivo [LICENSE](LICENSE) para os termos completos e informações de contato.
+
+– Para avaliação: permitido por até 30 dias apenas em desenvolvimento/teste (sem uso comercial).
+– Para produção: exige licença comercial vigente. Entre em contato: `contatogstx@gmail.com` (Gustavo Azevedo).
 
 ## 🤝 Contribuindo
 
