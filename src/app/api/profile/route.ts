@@ -74,12 +74,12 @@ export async function PUT(request: NextRequest) {
       },
       "Perfil atualizado com sucesso"
     );
-  } catch (error: any) {
+  } catch (error) {
     // Corrige possíveis erros de referência a File (ex: ReferenceError: File is not defined)
     if (
       error instanceof ReferenceError &&
-      typeof error.message === "string" &&
-      error.message.includes("File is not defined")
+      typeof (error as any).message === "string" &&
+      (error as any).message.includes("File is not defined")
     ) {
       console.error("Erro de referência a File:", error);
       return createValidationErrorResponse([
