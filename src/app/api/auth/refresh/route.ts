@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   getRefreshTokenFromCookies,
@@ -13,7 +12,7 @@ import {
   createSuccessResponse,
 } from "@/lib/validation-utils";
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // Obter refresh token dos cookies
     const refreshToken = await getRefreshTokenFromCookies();

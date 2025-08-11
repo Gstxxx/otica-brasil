@@ -65,6 +65,7 @@ export default function FileUpload({
     if (!selectedFile) return <Upload className="w-8 h-8 text-gray-400" />;
 
     if (selectedFile.type.startsWith("image/")) {
+      // eslint-disable-next-line jsx-a11y/alt-text
       return <Image className="w-8 h-8 text-blue-500" />;
     }
 

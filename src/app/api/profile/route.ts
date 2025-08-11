@@ -78,8 +78,8 @@ export async function PUT(request: NextRequest) {
     // Corrige possíveis erros de referência a File (ex: ReferenceError: File is not defined)
     if (
       error instanceof ReferenceError &&
-      typeof (error as any).message === "string" &&
-      (error as any).message.includes("File is not defined")
+      typeof (error as Error).message === "string" &&
+      (error as Error).message.includes("File is not defined")
     ) {
       console.error("Erro de referência a File:", error);
       return createValidationErrorResponse([

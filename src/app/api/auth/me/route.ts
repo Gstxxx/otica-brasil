@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getAccessTokenFromCookies, verifyAccessToken } from "@/lib/jwt";
 import {
@@ -6,7 +5,7 @@ import {
   createSuccessResponse,
 } from "@/lib/validation-utils";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Obter access token dos cookies
     const accessToken = await getAccessTokenFromCookies();

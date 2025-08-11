@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Camera, FileText, CreditCard } from "lucide-react";
 import type { LensType } from "@prisma/client";
 import {
   completeCustomerRegistrationSchema,
@@ -49,7 +48,6 @@ export default function CustomerOrderForm({
 }: CustomerOrderFormProps) {
   const [step, setStep] = useState(1);
   const [selectedLenses, setSelectedLenses] = useState<string[]>([]);
-  const [showPassword, setShowPassword] = useState(false);
   const [files, setFiles] = useState({
     glassesPhoto: null as File | null,
     prescriptionPhoto: null as File | null,
@@ -67,7 +65,6 @@ export default function CustomerOrderForm({
     handleSubmit,
     formState: { errors, isSubmitting },
     setValue,
-    watch,
   } = useForm<CompleteCustomerRegistrationInput>({
     resolver: zodResolver(completeCustomerRegistrationSchema),
   });

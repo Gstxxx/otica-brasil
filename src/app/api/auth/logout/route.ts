@@ -1,8 +1,7 @@
-import { NextRequest } from "next/server";
 import { clearAuthCookies } from "@/lib/jwt";
 import { createSuccessResponse } from "@/lib/validation-utils";
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // Limpar cookies de autenticação
     await clearAuthCookies();

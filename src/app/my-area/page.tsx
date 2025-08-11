@@ -10,9 +10,6 @@ import {
 import {
   User,
   Mail,
-  Phone,
-  MapPin,
-  Calendar,
   Edit3,
   Save,
   X,

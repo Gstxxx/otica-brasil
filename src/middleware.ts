@@ -100,7 +100,7 @@ export async function middleware(request: NextRequest) {
         });
 
         return response;
-      } catch (error) {
+      } catch {
         // Refresh token inválido, redirecionar para login
         return redirectToLogin(request);
       }
@@ -125,7 +125,7 @@ export async function middleware(request: NextRequest) {
         headers: requestHeaders,
       },
     });
-  } catch (error) {
+  } catch {
     // Token inválido, redirecionar para login
     return redirectToLogin(request);
   }

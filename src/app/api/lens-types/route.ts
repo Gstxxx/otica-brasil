@@ -1,11 +1,10 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   createSuccessResponse,
   createValidationErrorResponse,
 } from "@/lib/validation-utils";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Buscar tipos de lentes ativos
     const lensTypes = await prisma.lensType.findMany({

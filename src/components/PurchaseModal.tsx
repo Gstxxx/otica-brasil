@@ -6,14 +6,9 @@ import { z } from "zod";
 import {
   X,
   Camera,
-  Upload,
   User,
-  Mail,
-  Phone,
-  MapPin,
   Eye,
-  Plus,
-  Minus,
+  MapPin,
 } from "lucide-react";
 import FileUpload from "./FileUpload";
 import CepInput from "./CepInput";
@@ -98,7 +93,6 @@ export default function PurchaseModal({
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
     reset,
   } = useForm<PurchaseFormData>({
     resolver: zodResolver(purchaseSchema),

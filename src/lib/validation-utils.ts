@@ -21,9 +21,8 @@ export async function validateInput<T>(
   } catch (error) {
     if (error instanceof z.ZodError) {
       // Extrai todas as mensagens de erro do Zod
-      const errors = (
-        error as unknown as { errors: Array<{ message: string }> }
-      ).errors.map((err) => err.message);
+      const zodError = error as z.ZodError;
+      const errors = zodError.issues.map((issue: { message: string }) => issue.message);
       return { success: false, errors };
     }
     // Caso o erro não seja do Zod, retorna erro genérico
@@ -45,12 +44,10 @@ export async function validateRequest<T>(
 ): Promise<{ success: true; data: T } | { success: false; errors: string[] }> {
   try {
     const body = await request.json();
-    return await validateInput(schema, body);
-  } catch (error) {
-    return {
-      success: false,
-      errors: ["Erro ao processar dados da requisição"],
-    };
+    const validatedData = await schema.parseAsync(body);
+    return { success: true, data: validatedData };
+  } catch {
+    return { success: false, errors: ["Erro ao processar dados da requisição"] };
   }
 }
 

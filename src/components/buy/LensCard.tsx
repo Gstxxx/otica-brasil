@@ -3,7 +3,7 @@
 import React from "react";
 import type { LensInfo } from "@/hooks/useLensTypes";
 import { toBRL } from "@/lib/currency";
-import { Check, Eye, Sparkles } from "lucide-react";
+import { Check, Eye } from "lucide-react";
 
 interface LensCardProps {
   lens: LensInfo;

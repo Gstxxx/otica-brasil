@@ -52,7 +52,7 @@ export async function verifyAccessToken(token: string): Promise<JWTPayload> {
   try {
     const { payload } = await jwtVerify(token, secret);
     return payload as unknown as JWTPayload;
-  } catch (error) {
+  } catch {
     throw new Error("Token inválido");
   }
 }
@@ -63,7 +63,7 @@ export async function verifyRefreshToken(
   try {
     const { payload } = await jwtVerify(token, refreshSecret);
     return payload as unknown as RefreshTokenPayload;
-  } catch (error) {
+  } catch {
     throw new Error("Refresh token inválido");
   }
 }

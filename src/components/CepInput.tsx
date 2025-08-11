@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Search, MapPin } from "lucide-react";
+import { Search } from "lucide-react";
 
 interface CepInputProps {
   value: string;

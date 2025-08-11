@@ -6,7 +6,6 @@ import {
   createValidationErrorResponse,
   createSuccessResponse,
 } from "@/lib/validation-utils";
-import type { CreateOrderInput } from "@/lib/validations";
 
 export async function POST(request: NextRequest) {
   try {
@@ -55,7 +54,7 @@ export async function POST(request: NextRequest) {
       });
 
       // Criar itens do pedido
-      const orderItems = await Promise.all(
+      await Promise.all(
         lensTypeIds.map((lensTypeId) =>
           tx.orderItem.create({
             data: {

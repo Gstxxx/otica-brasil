@@ -8,7 +8,6 @@ import {
 } from "@/lib/validation-utils";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import type { CompleteCustomerRegistrationInput } from "@/lib/validations";
 
 export async function POST(request: NextRequest) {
   try {

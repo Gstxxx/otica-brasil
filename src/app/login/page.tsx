@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import LoginForm from "@/components/LoginForm";
@@ -10,7 +9,6 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { login } = useAuth();
-  const router = useRouter();
 
   const handleLogin = async (data: { email: string; password: string }) => {
     try {

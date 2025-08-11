@@ -17,7 +17,6 @@ export default function RegisterPage() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -29,8 +28,6 @@ export default function RegisterPage() {
       address: "",
     },
   });
-
-  const password = watch("password");
 
   const handleRegister = async (data: RegisterInput) => {
     try {
