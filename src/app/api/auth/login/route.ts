@@ -1,8 +1,8 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { loginSchema } from "@/lib/validations";
 import {
-  validateRequest,
+  validateInput,
   createValidationErrorResponse,
   createSuccessResponse,
 } from "@/lib/validation-utils";
@@ -16,7 +16,8 @@ import bcrypt from "bcryptjs";
 
 export async function POST(request: NextRequest) {
   try {
-    const validation = await validateRequest(loginSchema, request);
+    const body = await request.json();
+    const validation = await validateInput(loginSchema, body);
 
     if (!validation.success) {
       return createValidationErrorResponse(validation.errors);
@@ -56,22 +57,22 @@ export async function POST(request: NextRequest) {
     });
 
     // Definir cookies
-    await setAuthCookies(accessToken, refreshToken);
-
-    // Retornar dados do usuário (sem senha)
-    const userData = {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-      customer: user.customer,
-      admin: user.admin,
-    };
-
-    return createSuccessResponse({
-      user: userData,
+    const response = createSuccessResponse({
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        customer: user.customer,
+        admin: user.admin,
+      },
       message: "Login realizado com sucesso",
     });
+
+    // Definir cookies na resposta
+    await setAuthCookies(accessToken, refreshToken);
+
+    return response;
   } catch (error) {
     console.error("Erro no login:", error);
     return createValidationErrorResponse(["Erro interno do servidor"]);
